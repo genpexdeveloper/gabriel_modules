@@ -1,0 +1,7 @@
+import ads_manager
+import ads_connection
+import stock_picking
+import product
+import res_partner
+import delivery_carrier
+import ads_cron_manager

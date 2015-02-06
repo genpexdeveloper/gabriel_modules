@@ -1,0 +1,129 @@
+@mixin ip-cart
+{
+	html
+	{
+		body
+		{
+			#wrapper
+			{
+				td[name="price"],
+				#mycart_products .text-center
+				{
+					text-align: left;
+				}
+				#order_total
+				{
+					.oe_currency_value
+					{
+						padding-left: 5px;
+					}
+				}
+				ul.wizard {
+				  padding: 0;
+				  margin-top: 20px;
+                  margin-right: 10px;
+				  list-style: none outside none;
+				  -webkit-border-radius: 4px;
+				  -moz-border-radius: 4px;
+				  border-radius: 4px;
+				  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.065);
+				  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.065);
+				  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.065);
+				}
+
+				ul.wizard li {
+				  border: 1px solid #d4d4d4;
+				  border-right-width: 0;
+				  position: relative;
+				  float: left;
+				  padding: 0 10px 0 20px;
+				  margin: 0;
+				  line-height: 38px;
+				  background: #fbfbfb;
+				}
+
+				ul.wizard li .chevron {
+				  position: absolute;
+				  top: 0;
+				  right: -10px;
+				  z-index: 1;
+				  display: block;
+				  border: 20px solid transparent;
+				  border-right: 0;
+				  border-left: 10px solid #d4d4d4;
+				}
+
+				ul.wizard li .chevron:before {
+				  position: absolute;
+				  top: -20px;
+				  right: 1px;
+				  display: block;
+				  border: 20px solid transparent;
+				  border-right: 0;
+				  border-left: 10px solid #fbfbfb;
+				  content: "";
+				}
+
+				ul.wizard li.text-success {
+				  background: #f3f4f5;
+				}
+
+				ul.wizard li.text-success .chevron:before {
+				  border-left: 10px solid whitesmoke;
+				}
+
+				ul.wizard li.text-primary {
+				  background: #f1f6fc;
+				}
+
+				ul.wizard li.text-primary .chevron:before {
+				  border-left: 10px solid #f1f6fc;
+				}
+
+				ul.wizard li:first-child {
+				  padding-left: 15px;
+				  border-radius: 4px 0 0 4px;
+				}
+
+				a[href="/shop/checkout/"]
+				{
+					clear: both;
+					margin-top: 15px;
+				}
+
+				.oe_mycart
+				{
+					input[type="text"].form-control
+					{
+						min-width: 60px;
+						text-align: left;
+					}
+				}
+                #mycart_total {
+                    margin-bottom: 10px;
+                }
+
+				.oe_mycart:after {
+				    content: ".";
+				    display: block;
+				    clear: both;
+				    visibility: hidden;
+				    line-height: 0;
+				    height: 0;
+				}
+				 
+				.oe_mycart {
+				    display: inline-block;
+				}
+				 
+				html[xmlns] .oe_mycart {
+				    display: block;
+				}
+				 
+				* html .oe_mycart {
+				    height: 1%;
+				}
+			}
+		}
+	}
+}

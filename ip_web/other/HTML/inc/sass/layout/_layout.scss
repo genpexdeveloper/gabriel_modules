@@ -1,0 +1,18 @@
+@import "fonts";
+@import "header";
+@import "main";
+@import "products";
+@import "product";
+@import "cart";
+@import "footer";
+
+@mixin ip-layout
+{
+	@include ip-fonts;
+	@include ip-header;
+	@include ip-main;
+	@include ip-products;
+	@include ip-product;
+	@include ip-cart;
+	@include ip-footer;
+}

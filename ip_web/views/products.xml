@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- DELETE UNREQUIRED DEFAULT TEMPLATES -->
+  <delete model="ir.ui.view" id="website_sale.add_to_basket" />
+  <delete model="ir.ui.view" id="website_sale.list_view" />
+  <delete model="ir.ui.view" id="website_sale.products_categories" />
+  <delete model="ir.ui.view" id="website_sale.products_attributes" />
+  <delete model="ir.ui.view" id="website_sale.product_description" />
+  <delete model="ir.ui.view" id="website_sale.product_variants" />
+  <delete model="ir.ui.view" id="website_sale.products_list_view" />
+  <!-- PRODUCTS TEMPLATE -->
+  <template id="products" name="IP Products" inherit_id="website_sale.products">
+   <xpath expr="//div[@id='wrap']" position="replace">
+    <div id="wrap" class="js_sale oe_website_sale">
+     <!-- SIDEBAR PLACEHOLDER -->
+     <div id="ip-sidebar"></div>
+     <!-- MAIN CONTENT -->
+     <div id="ip-main" class="col-md-12">
+      <div class="row">
+       <div class="col-md-12">
+        <ol class="breadcrumb">
+         <li>
+          <a t-attf-href="/shop?{{ keep_query('search', 'filters', 'page') if not category else keep_query('search', 'filters') }}">Products</a>
+         </li>
+         <li t-if="category">
+          <span t-esc="category.name" />
+         </li>
+        </ol>
+       </div>
+       <div class="ip-pager col-md-12">
+        <div class="col-md-2 col-xs-12">
+         <p>
+          <span t-esc="pager['total']" />
+          Results
+         </p>
+        </div>
+        <div class="col-md-7 col-xs-12">
+         <t t-call="website.pager" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+         <div>
+          <div class="double-border"></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div id="ip-products" class="col-md-12 col-xs-12">
+       <t t-if="len(products) > 0">
+        <t t-foreach="products" t-as="product">
+         <div class="col-md-3 col-xs-6 ip-category-product">
+          <a class="ip-category-product-image" t-attf-href="/shop/product/{{ slug(product) }}/?{{ keep_query('search', 'filters', category=(category and int(category)), page=(pager['page']['num'] if pager['page']['num']>1 else None)) }}">
+           <img class="img img-responsive" t-attf-src="/website/image/product.template/#{product.id}/image#{'' if product_image_big else '?max_width=158&amp;max_height=110'}" t-att-alt="product.name" />
+          </a>
+          <h3>
+           <a t-attf-href="/shop/product/{{ slug(product) }}/?{{ keep_query('search', 'filters', category=(category and int(category)), page=(pager['page']['num'] if pager['page']['num']>1 else None)) }}" t-field="product.name"></a>
+          </h3>
+          <div class="ip-product-description" t-field="product.description_sale" />
+          <div class="ip-category-product-price">
+           <div class="ip-product-price">
+            <t t-if="len(product.product_variant_ids) > 0">
+             <span t-field="product.product_variant_ids[0].price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span>
+            </t>
+           </div>
+          </div>
+<!--           <a t-attf-href="/shop/product/{{ slug(product) }}/?{{ keep_query('search', 'filters', category=(category and int(category)), page=(pager['page']['num'] if pager['page']['num']>1 else None)) }}" class="ip-product-variants-link">more sizes available</a> -->
+         </div>
+        </t>
+       </t>
+       <t t-if="len(products) == 0">
+        <p>No products found.</p>
+       </t>
+      </div>
+      <div class="row">
+       <div class="col-md-12 col-xs-12">
+        <div class="col-md-12 col-xs-12">
+         <div>
+          <div class="double-border"></div>
+         </div>
+        </div>
+       </div>
+       <div class="ip-pager col-md-12">
+        <div class="col-md-7 col-xs-12">
+         <t t-call="website.pager" />
+        </div>
+        <div class="col-md-5">
+         <a href="#" class="back-to-top pull-right">back to top</a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </xpath>
+  </template>
+  <!-- PRODUCTS SIDEBAR TEMPLATE -->
+  <template id="products_sidebar" name="Products Sidebar" inherit_id="ip_web.products">
+   <!-- INCLUDE SIDEBAR -->
+   <xpath expr="//div[@id='ip-sidebar']" position="replace">
+    <!-- SIDEBAR -->
+    <div id="ip-sidebar" class="col-md-3 col-xs-12">
+     <div class="ip-sidebar-widget-placeholder" />
+     <div class="widget">
+      <header>
+       <h2>Filter By:</h2>
+      </header>
+      <main class="widget-area">
+       <!-- <form t-attf-action="/shop/filters/?{{ keep_query('search', category=(category and int(category))) }}" class="attributes" method="post"> -->
+       <h3>Categories</h3>
+       <ul>
+        <t t-set="website_sale_categories" t-value="website.get_categories()" />
+        <t t-foreach="website_sale_categories" t-as="categ">
+         <li>
+          <a t-attf-href="/shop/category/#{ slug(categ) }/" t-esc="categ.name"></a>
+         </li>
+        </t>
+       </ul>
+       <!-- <t t-set="attribute_ids" t-value="website.get_attribute_ids()" /> -->
+       <!-- <t t-foreach="attribute_ids" t-as="attribute_id"> -->
+       <!-- <t t-if="attribute_id.value_ids and attribute_id.type == 'distinct'"> -->
+       <!-- <t t-if="attribute_id.name == 'Need'"> -->
+       <!-- <t t-set="need_attr_id" t-value="attribute_id.id" /> -->
+       <!-- <ul t-att-data="need_attr_id"> -->
+       <!-- <t t-foreach="attribute_id.value_ids" t-as="value_id"> -->
+       <!-- <t t-set="need_ids" t-valuef="#{need_ids},#{value_id.id}" /> -->
+       <!-- <li> -->
+       <!-- <a t-attf-href="/shop/?filters=[[#{attribute_id.id},#{value_id.id}]]" t-field="value_id.name" t-att-title="value_id.name"></a> -->
+       <!-- </li> -->
+       <!-- </t> -->
+       <!-- </ul> -->
+       <!-- </t> -->
+       <!-- </t> -->
+       <!-- </t> -->
+       <!-- </form> -->
+       <form class="js_attributes" method="get">
+        <input type="hidden" name="search" t-att-value="search" />
+        <ul>
+         <t t-foreach="attributes" t-as="a">
+          <t t-if="a.type != 'hidden'">
+           <li t-if="a.value_ids and len(a.value_ids) &gt; 1">
+            <h3 t-field="a.name" />
+            <t t-if="a.type == 'select'">
+             <select class="form-control" name="attrib">
+              <option value="" />
+              <t t-foreach="a.value_ids" t-as="v">
+               <option t-att-value="'%s-%s' % (a.id,v.id)" t-esc="v.name" t-att-selected="'selected' if v.id in attrib_set else ''" />
+              </t>
+             </select>
+            </t>
+            <t t-if="a.type == 'radio'">
+             <ul class="nav nav-pills nav-stacked">
+              <t t-foreach="a.value_ids" t-as="v">
+               <li t-att-class="'active' if v.id in attrib_set else ''">
+                <label style="margin: 0 20px;">
+                 <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else ''" />
+                 <span style="font-weight: normal" t-field="v.name" />
+                </label>
+               </li>
+              </t>
+             </ul>
+            </t>
+            <t t-if="a.type == 'color'">
+             <t t-foreach="a.value_ids" t-as="v">
+              <label t-attf-style="background-color:#{v.color or v.name}" t-attf-class="css_attribute_color #{'active' if v.id in attrib_set else ''}">
+               <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else ''" t-att-title="v.name" />
+              </label>
+             </t>
+            </t>
+           </li>
+          </t>
+         </t>
+        </ul>
+       </form>
+      </main>
+      <footer></footer>
+     </div>
+     <div class="ip-sidebar-widget-placeholder" />
+    </div>
+   </xpath>
+   <!-- CHANGE MAIN CONTENT BLOCK WIDTH -->
+   <xpath expr="//div[@id='ip-main']" position="attributes">
+    <attribute name="class">col-md-9</attribute>
+   </xpath>
+  </template>
+ </data>
+</openerp>

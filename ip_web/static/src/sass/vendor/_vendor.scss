@@ -1,0 +1,8 @@
+@import "bootstrap";
+@import "fancybox";
+
+@mixin ip-vendor
+{
+	@include ip-vendor-bootstrap;
+	@include ip-vendor-fancybox;
+}

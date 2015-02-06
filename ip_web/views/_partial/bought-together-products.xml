@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- Product option: related / recommended products -->
+  <template id="freq_bought_together_products" inherit_id="website_sale.product" priority="20" name="IP Frequently Bought Together Products">
+   <xpath expr="//div[@id='freq_bought_together_products']" position="replace">
+    <div id="ip-fbt">
+     <t t-foreach="product.product_variant_ids" t-as="variant">
+      <div class="col-md-12 col-xs-12 ip-fbt" t-attf-data-variant-id="#{variant.id}" t-attf-data-fbt-total="#{len(variant.x_substitute)}">
+       <t t-if="len(variant.x_substitute) > 0">
+        <h2 class="ip-h2">Frequently Bought Together</h2>
+        <div class="col-md-12">
+         <div class="row">
+          <t t-set="sub_iter" t-value="0" />
+          <t t-foreach="variant.x_substitute" t-as="product">
+           <t t-set="sub_iter" t-value="sub_iter + 1" />
+           <t t-if="sub_iter &lt; 4">
+            <div class="col-md-4 col-xs-4 ip-fbt-image no-padding-left no-padding-right ip-fbt-plus">
+             <span t-field="product.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+            </div>
+           </t>
+          </t>
+         </div>
+        </div>
+        <div>
+         <ul>
+          <t t-set="sub_iter" t-value="0" />
+          <t t-foreach="variant.x_substitute" t-as="product">
+          
+           <t t-set="sub_iter" t-value="sub_iter + 1" />
+           <t t-if="sub_iter &lt; 4">
+            <li class="pull-left" style="margin-bottom: 5px !important">
+             <t t-esc="product.name" />
+             <a title="add to cart"  href="#" class="pull-left btn btn-xs btn-primary ip-link-add-to-cart a-submit" style="margin-right: 5px;" t-att-data-id="product.id" t-att-data-autoship="str(product.auto_ship)">add to cart</a>
+             <span style="margin-left: 10px;" class="ip-additional-price" t-field="product.lst_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span>
+            </li>
+           </t>
+          </t>
+         </ul>
+        </div>
+       </t>
+      </div>
+     </t>
+    </div>
+   </xpath>
+  </template>
+ </data>
+</openerp>

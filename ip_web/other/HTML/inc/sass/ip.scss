@@ -1,0 +1,11 @@
+@import "compass/css3";
+@import "layout/layout";
+@import "helpers/helpers";
+
+@mixin ip
+{
+	@include ip-layout;
+	@include ip-helpers;
+}
+
+@include ip;

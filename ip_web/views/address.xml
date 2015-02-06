@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- ADDRESS EDIT TEMPLATE -->
+        <template id="address_edit" name="IP Customer Address Edit" inherit_id="ip_web_addons.address_edit">
+            <xpath expr="//div[@class='container']" position="replace">
+                <div id="wrap">
+                    <!-- SIDEBAR -->
+                    <div id="ip-sidebar" class="col-md-3 col-xs-12">
+
+                        <div class="ip-sidebar-widget-placeholder" />
+
+                        <!-- WIDGET -->
+                        <div class="widget">
+                            <header><h2>Account:</h2></header>
+                            <main class="widget-area">
+                                <section>
+                                    <h3>Profile and Address</h3>
+                                    <ul>
+                                        <li><a title="Overview" href="/account/address">Overview</a></li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h3>Order History</h3>
+                                    <ul>
+                                        <li><a title="Orders" href="/account/orders">Orders</a></li>
+                                        <li><a title="Invoices" href="/account/invoices">Invoices</a></li>
+                                        <li><a title="Deliveries" href="/account/deliveries">Deliveries</a></li>
+                                        <li><a title="Auto Ships" href="/account/auto-ships">Auto Ships</a></li>
+                                        <li><a title="Transactions" href="/account/transactions">Transactions</a></li>
+                                        <li><a title="Returns" href="/account/returns">Returns</a></li>
+                                    </ul>
+                                </section>
+                            </main>
+                            <footer></footer>
+                        </div>
+
+                        <div class="ip-sidebar-widget-placeholder" />
+                    </div>
+
+                    <!-- MAIN CONTENT -->
+                    <div id="ip-main" class="col-md-9 col-xs-12">
+
+                        <div class="oe_structure"/>
+
+                        <h2>Billing Address</h2>
+                        <t t-set="address" t-value="partner_billing" />
+                        <t t-call="ip_web_addons.partner_address_edit_form" />
+
+                        <t t-if="partners_shipping or []">
+                            <h2>Shipping Addresses</h2>
+                            <t t-foreach="partners_shipping or []" t-as="address">
+                                <t t-call="ip_web_addons.partner_address_edit_form" />
+                            </t>
+                        </t>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="aj-profile-updated" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="myModalLabel">Profile Updated.</h4>
+                      </div>
+                      <div class="modal-body">
+                        Your profile information was successfully updated!
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="aj-profile-failed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="myModalLabel">Profile was not updated.</h4>
+                      </div>
+                      <div class="modal-body">
+                        There was a problem updating you profile. Please contact staff.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </xpath>
+        </template>   
+        
+
+        <!-- ADDRESS PREVIEW TEMPLATE -->
+        <template id="address" name="IP Customer Address Preview" inherit_id="ip_web_addons.address">
+            <xpath expr="//div[@class='container']" position="replace">
+                <div id="wrap">
+                    <!-- SIDEBAR -->
+                    <div id="ip-sidebar" class="col-md-3 col-xs-12">
+
+                        <div class="ip-sidebar-widget-placeholder" />
+
+                        <!-- WIDGET -->
+                        <div class="widget">
+                            <header><h2>Account:</h2></header>
+                            <main class="widget-area">
+                                <section>
+                                    <h3>Profile and Address</h3>
+                                    <ul>
+                                        <li><a href="/account/address">Overview</a></li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h3>Order History</h3>
+                                    <ul>
+                                        <li><a href="/account/orders">Orders</a></li>
+                                        <li><a href="/account/invoices">Invoices</a></li>
+                                        <li><a href="/account/deliveries">Deliveries</a></li>
+                                        <li><a href="/account/auto-ships">Auto Ships</a></li>
+                                        <li><a href="/account/transactions">Transactions</a></li>
+                                        <li><a href="/account/returns">Returns</a></li>
+                                    </ul>
+                                </section>
+                            </main>
+                            <footer></footer>
+                        </div>
+
+                        <div class="ip-sidebar-widget-placeholder" />
+                    </div>
+
+                    <!-- MAIN CONTENT -->
+                    <div id="ip-main" class="col-md-9 col-xs-12">
+
+                        <div class="oe_structure"/>
+
+                        <h2>Billing Address</h2>
+                        <t t-set="address" t-value="partner_billing" />
+                        <t t-call="ip_web_addons.partner_address_view_form" />
+
+                        <h2>Shipping Addresses</h2>
+                        <t t-if="partners_shipping or []">
+                            <t t-foreach="partners_shipping or []" t-as="address">
+                                <t t-call="ip_web_addons.partner_address_view_form" />
+                            </t>
+                        </t>
+
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- ADDRESS EDIT TEMPLATE -->
+        <template id="address_edit_form" name="IP Customer Address Edit From" inherit_id="ip_web_addons.partner_address_edit_form">
+            <xpath expr="//div[@class='update-address']" position="replace">
+                <div class="panel panel-default">
+                    <form role="form">
+                        <input type="hidden" name="id" t-att-value="address.id" />
+                        <table class="table">
+                            <tr>
+                                <td>Name<span class="ip-required">*</span></td>
+                                <td><input class="form-control" type="text" name="name" t-att-value="address.name" /></td>
+                            </tr>
+                            <tr>
+                                <td>Title</td>
+                                <td class="form-group">
+                                    <select name="title" class="form-control">
+                                        <option value="">Select...</option>
+                                        <t t-foreach="titles or []" t-as="title">
+                                            <option t-att-value="title.id" t-att-selected="title.id == address.title.id">
+                                                <t t-esc="title.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td class="form-group">
+                                    <select name="gender" class="form-control">
+                                        <option value="">Select...</option>
+                                        <option value="m" t-att-selected="address.gender == 'm'">Male</option>
+                                        <option value="f" t-att-selected="address.gender == 'f'">Female</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td><input type="text" class="datepicker" name="birthdate" t-att-value="address.birthdate" /></td>
+                            </tr>
+                            <tr>
+                                <td>Diseases</td>
+                                <td>
+                                   <select multiple="true" class="select2" name="disease_ids" style="width: 400px">
+                                        <t t-foreach="diseases or []" t-as="disease">
+                                            <option t-att-value="disease.id" 
+                                                    t-att-selected="disease.id in [d.id for d in partner.disease_ids]">
+                                                <t t-esc="disease.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td><input type="text" name="phone" t-att-value="address.phone" /></td>
+                            </tr>
+                            <tr>
+                                <td>Street<span class="ip-required">*</span></td>
+                                <td><input class="form-control" type="text" name="street" t-att-value="address.street" /></td>
+                            </tr>
+                            <tr>
+                                <td>Street2</td>
+                                <td><input class="form-control" type="text" name="street2" t-att-value="address.street2" /></td>
+                            </tr>
+                            <tr>
+                                <td>City<span class="ip-required">*</span></td>
+                                <td><input class="form-control" type="text" name="city" t-att-value="address.city" /></td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>
+                                    <select name="state_id" class="form-control">
+                                        <option value="">Select...</option>
+                                        <t t-foreach="states or []" t-as="state">
+                                            <option t-att-value="state.id" t-att-selected="state.id == address.state_id.id">
+                                            <t t-esc="state.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Zip</td>
+                                <td><input class="form-control" type="text" name="zip" t-att-value="address.zip" /></td>
+                            </tr>
+                            <tr>
+                                <td>Country<span class="ip-required">*</span></td>
+                                <td>
+                                    <select name="country_id" class="form-control">
+                                        <option value="">Select...</option>
+                                        <t t-foreach="countries or []" t-as="country">
+                                            <option t-att-value="country.id" t-att-selected="country.id == address.country_id.id">
+                                            <t t-esc="country.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td><button type="button" class="btn btn-primary aj-address-submit">Save</button></td><td></td></tr>
+                        </table>
+                    </form>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- ADDRESS PREVIEW TEMPLATE -->
+        <template id="address_edit_view" name="IP Customer Address From" inherit_id="ip_web_addons.partner_address_view_form">
+            <xpath expr="//div[@class='update-address']" position="replace">
+                <div class="panel panel-default">
+                    <table class="table">
+                        <tr>
+                            <td>Name</td>
+                            <td><t t-esc="address.name" /></td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td>
+                                <t t-foreach="titles or []" t-as="title">
+                                    <t t-if="title.id == address.title.id">
+                                        <t t-esc="title.name"/>
+                                    </t>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td><span t-if="address.gender == 'm'">Male</span><span t-if="address.gender == 'f'">Female</span></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td><t t-esc="address.birthdate" /></td>
+                        </tr>
+                        <tr>
+                            <td>Diseases</td>
+                            <td>
+                                <t t-foreach="address.disease_ids" t-as="cat">
+                                    <span class="label label-primary" t-field="cat.name" />
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td><t t-esc="address.phone" /></td>
+                        </tr>
+                        <tr>
+                            <td>Street</td>
+                            <td><t t-esc="address.street" /></td>
+                        </tr>
+                        <tr>
+                            <td>Street2</td>
+                            <td><t t-esc="address.street2" /></td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td><t t-esc="address.city" /></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td>
+                                <t t-foreach="states or []" t-as="state">
+                                    <t t-if="state.id == address.state_id.id">
+                                        <t t-esc="state.name"/>
+                                    </t>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Zip</td>
+                            <td><t t-esc="address.zip" /></td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td>
+                                <t t-foreach="countries or []" t-as="country">
+                                    <t t-if="country.id == address.country_id.id">
+                                        <t t-esc="country.name"/>
+                                    </t>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr><td><button type="button" class="btn btn-default" onclick="window.location.href = '/account/address/edit';">Edit</button></td><td></td></tr>
+                    </table>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</openerp>

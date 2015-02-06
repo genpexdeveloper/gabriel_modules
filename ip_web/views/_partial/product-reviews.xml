@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- PRODUCT REVIEWS TEMPLATE -->
+  <template id="product_reviews" inherit_id="website_sale.product" name="IP Product Reviews">
+   <xpath expr="//div[@id='ip-product-reviews']" position="replace">
+    <div class="col-md-12 col-xs-12 ip-reviews">
+     <h1 class="ip-reviews-title">PRODUCT REVIEWS AND RESOURCES</h1>
+     <p class="no-margin-bottom">We've collected resources from around the web to help you make your purchasing decisions.</p>
+     <t t-if="len(product.website_message_ids) > 0">
+      <p class="ip-reviewed text-align-right no-margin-bottom">
+       Reviewed by
+       <t t-esc="len(product.website_message_ids)" />
+       customers
+      </p>
+     </t>
+     <t t-if="len(product.website_message_ids) == 0">
+      <p class="ip-reviewed text-align-right no-margin-bottom">No reviews yet</p>
+     </t>
+     <div t-foreach="product.website_message_ids" t-as="message" class="col-md-12 ip-review">
+      <div class="col-md-12">
+       <t t-call="website.publish_short">
+        <t t-set="object" t-value="message" />
+       </t>
+      </div>
+      <div class="col-md-5">
+       <p>
+        By
+        <span t-field="message.author_id"></span>
+       </p>
+       <t t-if="message.author_id.city or message.author_id.country_id.name">
+        <p>
+         from
+         <t t-if="message.author_id.city" t-esc="message.author_id.city" />
+         <t t-if="message.author_id.country_id.name">
+          ,
+          <t t-esc="message.author_id.country_id.name" />
+         </t>
+        </p>
+       </t>
+      </div>
+      <div class="col-md-7">
+       <div t-field="message.body"></div>
+      </div>
+     </div>
+     <div class="col-md-12">
+      <p class="text-align-right">
+       <t t-if="len(product.website_message_ids) > 0">
+        Displaying reviews 1-
+        <t t-esc="len(product.website_message_ids)" />
+       </t>
+       <a href="#" class="back-to-top" title="Back to top">Back to top</a>
+      </p>
+     </div>
+     <div class="css_editable_mode_hidden col-md-12">
+      <t groups="base.group_public">
+       <a class="btn btn-primary mt8" t-attf-href="/web/login?redirect=/shop/product/#{product.id}%23comment" title="Log in to post comments">Log in</a>
+       <span>to post comments</span>
+      </t>
+      <t groups="base.group_user,base.group_portal">
+       <form id="comment" t-attf-action="/shop/product/comment/#{product.id}" method="POST">
+        <div class="col-md-8 col-md-offset-2">
+         <textarea rows="3" name="comment" class="form-control" placeholder="Write a comment..."></textarea>
+         <a title="Post" class="ip-comment-button btn btn-primary mt8 a-submit" onclick="$(this).closest('form').submit();">Post</a>
+        </div>
+       </form>
+      </t>
+     </div>
+    </div>
+   </xpath>
+  </template>
+ </data>
+</openerp>

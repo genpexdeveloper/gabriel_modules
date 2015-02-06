@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="account" name="My Account">
+            <t t-call="website.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" href="/ip_web_addons/static/src/css/account.css" />
+                    <script type="text/javascript" src="/ip_web_addons/static/src/js/account.js"></script>
+                    <t t-raw="head or ''"/>
+                </t>
+                <t t-set="additional_title">My Account</t>
+                <div class="container">
+                    <a href="/account/address">Edit my addresses...</a>
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#orders">Orders</a></li>
+                            <li><a href="#invoices">Invoices</a></li>
+                            <li><a href="#deliveries">Deliveries</a></li>
+                            <li><a href="#auto-ships">Auto Ships</a></li>
+                            <li><a href="#transactions">Transactions</a></li>
+                            <li><a href="#returns">Returns</a></li>
+                        </ul>
+
+                        <div id="orders">
+                            <h3>My Orders</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Order Reference</th>
+                                    <th>Date</th>
+                                    <th>Total Price</th>
+                                    <th class="action">Download</th>
+                                </tr>
+                                <t t-foreach="sale_orders" t-as="sales_order">
+                                <tr>
+                                    <td><t t-esc="sales_order.name" /></td>
+                                    <td><t t-esc="sales_order.date_order" /></td>
+                                    <td><t t-esc="sales_order.amount_total" /></td>
+                                    <td class="action"><a class="btn btn-primary" t-attf-href="/report/pdf/sale.report_saleorder/#{sales_order.id}">Download</a></td>
+                                </tr>
+                                </t>
+                                <tr t-if="not len(sale_orders)"><td class="table-empty" colspan="4">You haven't made any orders</td></tr>
+                            </table>
+                        </div>
+
+                        <div id="invoices">
+                            <h3>Deliveries</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Invoice Reference</th>
+                                    <th>Order Reference</th>
+                                    <th>Date</th>
+                                    <th class="action">Download</th>
+                                </tr>
+                                <t t-foreach="invoices" t-as="invoice">
+                                <tr>
+                                    <td><t t-esc="invoice.number" /></td>
+                                    <td><t t-esc="invoice.origin" /></td>
+                                    <td><t t-esc="invoice.date_invoice" /></td>
+                                    <td class="action"><a class="btn btn-primary" t-attf-href="/report/pdf/account.report_invoice/#{invoice.id}">Download</a></td>
+                                </tr>
+                                </t>
+                                <tr t-if="not len(invoices)"><td class="table-empty" colspan="4">You don't have any invoices</td></tr>
+                            </table>
+                        </div>
+
+                        <div id="deliveries">
+                            <h3>My Deliveries</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Sales Order</th>
+                                    <th>Fastest Expected Delivery Date</th>
+                                    <th>Status</th>
+                                    <th>Tracking Number</th>
+                                    <th class="action">Download</th>
+                                </tr>
+                                <t t-foreach="deliveries" t-as="delivery">
+                                <tr>
+                                    <td><t t-esc="delivery.origin" /></td>
+                                    <td><t t-esc="delivery.min_date" /></td>
+                                    <td><t t-esc="delivery.state" /></td>
+                                    <td><t t-esc="delivery.carrier_tracking_ref" /></td>
+                                    <td class="action"><a class="btn btn-primary" t-attf-href="/report/pdf/stock.report_picking/#{delivery.id}">Download</a></td>
+                                </tr>
+                                </t>
+                                <tr t-if="not len(deliveries)"><td class="table-empty" colspan="5">You don't have any deliveries</td></tr>
+                            </table>
+                        </div>
+
+                        <div id="auto-ships">
+                            <h3>Auto Ships</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Interval</th>
+                                    <th>End Date</th>
+                                    <th>Number Remaining</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th class="action"></th>
+                                </tr>
+                                <t t-foreach="auto_ships" t-as="auto_ship">
+                                <t t-set="first" t-value="True" />
+                                <t t-foreach="auto_ship.latest_sale_order.order_line" t-as="order_line">
+                                <tr t-attf-data-auto-ship-id="#{auto_ship.id}">
+                                	<t t-if="first == True">
+                                    	<td><t t-esc="auto_ship.name" /></td>
+                                    	<td>
+											<input type="text" class="interval" t-attf-value="#{auto_ship.interval}" />
+										</td>
+                                    	<td>
+                                    		<input type="text" class="end_date" t-attf-value="#{auto_ship.end_date}" />
+                            	       </td>
+                                    	<td class="number_remaining">
+                                            <t t-esc="auto_ship.number_remaining" />
+                                        </td>
+                                    	<td><t t-esc="order_line.product_id.name" /></td>
+                                    	<td><t t-esc="order_line.price_subtotal" /></td>
+	                                    <td><t t-esc="order_line.product_uom_qty" /></td>
+                                    	<td class="action">
+	                                        <a class="btn btn-primary update">Update</a>
+                                        	<br />
+                                        	<a class="btn btn-danger delete">Delete</a>
+                                    	</td>
+                                    </t>
+                                    <t t-if="first != True">
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td><t t-esc="order_line.product_id.name" /></td>
+                                    	<td><t t-esc="order_line.price_subtotal" /></td>
+	                                    <td><t t-esc="order_line.product_uom_qty" /></td>
+                                    	<td></td>
+                                    </t>
+                                    <t t-set="first" t-value="False" />
+                                </tr>
+                                </t>
+                                </t>
+                                <tr t-if="not len(auto_ships)"><td class="table-empty" colspan="8">You haven't setup any auto shipments</td></tr>
+                            </table>
+                        </div>
+
+                        <div id="transactions">
+                            <h3>My Transactions</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Order Reference</th>
+                                    <th>Payment Method</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                                <t t-foreach="transactions" t-as="transaction">
+                                <tr>
+                                    <td><t t-esc="transaction.reference" /></td>
+                                    <td><t t-esc="transaction.acquirer_id.name.title()" /></td>
+                                    <td><t t-esc="transaction.amount" /></td>
+                                    <td><t t-esc="transaction.date_create" /></td>
+                                    <td><t t-esc="transaction.state == 'pending' and 'Awaiting Payment' or transaction.state == 'done' and 'Paid' or transaction.state" /></td>
+                                </tr>
+                                </t>
+                                <tr t-if="not len(transactions)"><td class="table-empty" colspan="5">You haven't made any transactions</td></tr>
+                            </table>
+                        </div>
+
+                        <div id="returns">
+                            <h3>My Returns</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Return Reference</th>
+                                    <th>Related Order Reference</th>
+                                    <th>Date</th>
+                                    <th>Download</th>
+                                </tr>
+                                <t t-foreach="returns" t-as="ret">
+                                <tr>
+                                    <td><t t-esc="ret.name" /></td>
+                                    <td><t t-esc="ret.origin" /></td>
+                                    <td><t t-esc="ret.min_date" /></td>
+                                    <td class="action"><a class="btn btn-primary" t-attf-href="/report/pdf/stock.report_picking/#{ret.id}">Download</a></td>
+                                </tr>
+                                </t>
+                                <tr t-if="not len(returns)"><td class="table-empty" colspan="4">You haven't returned anything</td></tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </t>
+        </template>
+
+    </data>
+</openerp>

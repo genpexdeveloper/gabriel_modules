@@ -1,0 +1,11 @@
+@import "variables";
+@import "padding";
+@import "margin";
+@import "other";
+
+@mixin ip-helpers
+{
+	@include ip-helpers-padding;
+	@include ip-helpers-margin;
+	@include ip-helpers-other;
+}

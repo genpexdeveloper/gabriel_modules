@@ -1,0 +1,40 @@
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="product_form_ip_web">
+		    <field name="name">product.form.ip_web</field>
+		    <field name="model">product.product</field>
+		    <field name="inherit_id" ref="product.product_normal_form_view"/>
+		    <field name="arch" type="xml">
+				<xpath expr="//field[@name='default_code']" position="replace">
+					<field name="x_new_ref"/>
+					<field name="x_code_lpp"/>
+				</xpath>
+
+				<xpath expr="//page[@string='Accounting']" position="after">
+					<page string="Website Data">
+						<group string="Product Attributes">
+							<field name="x_absorption"/>
+							<field name="x_waist"/>
+							<field name="x_substitute" widget="many2many_tags"/>
+							<field name="x_other_purchases" widget="many2many_tags"/>
+				      	</group>
+
+				      	<group string="Packaging Description">
+							<field name="x_box_quantity"/>
+							<field name="x_bag_quantity"/>
+				      	</group>
+
+				      	<group string="Pictures">
+							<field name="x_image2" widget="image"/>
+							<field name="x_image3" widget="image"/>
+							<field name="x_image4" widget="image"/>
+							<field name="x_image5" widget="image"/>
+				      	</group>
+					</page>
+				</xpath>
+		    </field>
+		</record>
+
+	</data>
+</openerp>

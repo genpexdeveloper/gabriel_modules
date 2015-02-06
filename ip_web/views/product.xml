@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- DELETE UNREQUIRED DEFAULT TEMPLATES -->
+  <delete model="ir.ui.view" id="website_sale.product_attributes" />
+  <delete model="ir.ui.view" id="website_sale.product_quantity" />
+  <delete model="ir.ui.view" id="website_sale.product_comment" />
+  <!-- PRODUCT TEMPLATE -->
+  <template id="website_sale.product" name="Product">
+   <t t-call="website.layout">
+    <t t-set="additional_title" t-value="product.name" />
+    <div itemscope="itemscope" itemtype="http://schema.org/Product" id="wrap" class="js_sale">
+     <div id="ip-main" class="col-md-12">
+      <div class="col-md-5 col-xs-12 ip-product-description-area">
+       <div class="ip-product-description-area" />
+       <div class="ip-product-gallery">
+        <div class="ip-product-main-image">
+         <a class="fancybox" rel="product_images" t-attf-href="/website/image?model=product.template&amp;field=image&amp;id=#{product.id}">
+          <span t-field="product.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+         </a>
+         <t t-foreach="product.product_variant_ids" t-as="variant">
+          <t t-if="variant.x_image2">
+           <a class="fancybox" rel="product_images" t-attf-href="/website/image?model=product.product&amp;field=x_image2&amp;id=#{variant.id}">
+            <span class="other-variant-images" t-field="variant.x_image2" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </a>
+          </t>
+          <t t-if="variant.x_image3">
+           <a class="fancybox" rel="product_images" t-attf-href="/website/image?model=product.product&amp;field=x_image3&amp;id=#{variant.id}">
+            <span class="other-variant-images" t-field="variant.x_image3" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </a>
+          </t>
+          <t t-if="variant.x_image4">
+           <a class="fancybox" rel="product_images" t-attf-href="/website/image?model=product.product&amp;field=x_image4&amp;id=#{variant.id}">
+            <span class="other-variant-images" t-field="variant.x_image4" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </a>
+          </t>
+          <t t-if="variant.x_image5">
+           <a class="fancybox" rel="product_images" t-attf-href="/website/image?model=product.product&amp;field=x_image5&amp;id=#{variant.id}">
+            <span class="other-variant-images" t-field="variant.x_image5" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </a>
+          </t>
+         </t>
+        </div>
+        <div class="ip-product-thumbs col-md-12">
+         <t t-if="product.image">
+          <div class="ip-product-thumb active">
+           <span t-field="product.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+          </div>
+         </t>
+         <t t-foreach="product.product_variant_ids" t-as="variant">
+          <t t-if="variant.x_image2">
+           <div class="ip-product-thumb">
+            <span t-field="variant.x_image2" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </div>
+          </t>
+          <t t-if="variant.x_image3">
+           <div class="ip-product-thumb">
+            <span t-field="variant.x_image3" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </div>
+          </t>
+          <t t-if="variant.x_image4">
+           <div class="ip-product-thumb">
+            <span t-field="variant.x_image4" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </div>
+          </t>
+          <t t-if="variant.x_image5">
+           <div class="ip-product-thumb">
+            <span t-field="variant.x_image5" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           </div>
+          </t>
+         </t>
+        </div>
+       </div>
+       <div class="ip-product-description-area" />
+       <div id="product_description" />
+       <div class="ip-product-description-area" />
+       <section>
+        <div class="oe_structure" />
+        <p class="ip-section-title">product notes</p>
+        <t t-if="category">
+         <p>
+          View All:
+          <a t-attf-href="/shop/category/{{ slug(category) }}">
+           <t t-esc="category.name" />
+          </a>
+         </p>
+        </t>
+        <t t-foreach="product.attribute_line_ids" t-as="line">
+         <t t-if="line.attribute_id.name == 'Need'">
+          <p>
+           View All:
+           <t t-foreach="line.value_ids" t-as="value_id">
+            <a t-attf-href="/shop/?search=&amp;attrib=#{line.id}-#{value_id.id}" t-field="value_id.name"></a>
+           </t>
+          </p>
+         </t>
+        </t>
+        <t t-foreach="product.attribute_line_ids" t-as="line">
+         <t t-if="line.attribute_id.name == 'Brand'">
+          <p>
+           View All:
+           <t t-foreach="line.value_ids" t-as="value_id">
+            <a t-attf-href="/shop/?search=&amp;attrib=#{line.id}-#{value_id.id}" t-field="value_id.name"></a>
+           </t>
+          </p>
+         </t>
+        </t>
+        <div class="oe_structure" />
+       </section>
+       <div class="ip-product-description-area" />
+       <section>
+        <div class="oe_structure" />
+        <p class="ip-section-title">Special offers</p>
+        <p class="ip-section-subtitle">Subscription</p>
+        <p>Save 10% on all products by getting a subscription. This will automaticly send you the same products, on requested time. All options can be changed at any time | View all details</p>
+        <p class="ip-section-subtitle">New Customer</p>
+        <p>Get a 15% discount on your first order! Available for all new customers that have a reference code. Additional discounts my apply by using other offer | View all details</p>
+        <p class="ip-section-subtitle">VIP Customer</p>
+        <p>Get a 15% discount on your first order! Available for all new customers that have a reference code. Additional discounts my apply by using other offer | View all details</p>
+       </section>
+       <div class="ip-product-description-area" />
+      </div>
+      <div class="col-md-7 col-xs-12 ip-product-right-side no-padding-left">
+       <div class="oe_structure" />
+       <!-- PUBLISH MANAGER -->
+       <div class="col-sm-12 margin-bottom-15" groups="base.group_sale_manager">
+        <t t-call="website.publish_management">
+         <t t-set="object" t-value="product" />
+         <t t-set="publish_edit" t-value="True" />
+        </t>
+       </div>
+       <div class="col-md-8 col-xs-12">
+        <h1 class="ip-h1" t-field="product.name"></h1>
+       </div>
+       <div class="col-md-4 col-xs-12">
+        <t t-if="len(product.product_variant_ids) > 0">
+         <span class="ip-single-product-price" t-field="product.product_variant_ids[0].lst_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span>
+        </t>
+       </div>
+       <div class="oe_structure" />
+       <!-- VARIANTS TABLE -->
+       <t t-if="len(product.product_variant_ids) &gt; 0">
+        <div class="col-md-12">
+         <table class="ip-variants-table">
+          <thead>
+           <tr>
+            <th class="col-md-2 ip-variants-table-size"></th>
+            <th class="col-md-2">Absorpion</th>
+            <th class="col-md-2">Unit price</th>
+            <th class="col-md-2"># of Diapers</th>
+            <th class="col-md-2">Box</th>
+            <th class="col-md-4">Quantity</th>
+           </tr>
+          </thead>
+          <tbody>
+           <t t-foreach="product.product_variant_ids" t-as="variant">
+            <tr t-att-data-variant-id="variant.id" t-att-data-variant-price="variant.lst_price">
+             <td class="ip-variants-table-size">
+              <t t-if="variant and variant.attribute_value_ids">
+               <div class="ip-product-table-size-wrapper no-size">
+                <t t-foreach="variant.attribute_value_ids" t-as="variant_item">
+                 <span t-field="variant_item.name"/>
+                </t>
+               </div>
+              </t>
+             </td>
+             <td>
+              <span t-field="variant.x_absorption"></span>
+             </td>
+             <td class="ip-variants-table-price">
+              <span t-field="variant.lst_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span>
+             </td>
+             <td>
+              <span t-field="variant.x_bag_quantity"></span>
+             </td>
+             <td>
+              <t t-if="int(variant.x_box_quantity) > 0">
+               <span class="glyphicon glyphicon-inbox aj-box-quantity" t-att-data-box-quantity="variant.x_box_quantity"></span>
+              </t>
+             </td>
+             <td>
+              <div class="input-group ip-number-group">
+               <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                 <span class="glyphicon glyphicon-minus"></span>
+                </button>
+               </span>
+               <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10" readonly="readonly" data-step="1" />
+               <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                 <span class="glyphicon glyphicon-plus"></span>
+                </button>
+               </span>
+              </div>
+              <p class="pull-left margin-top-10">
+               <sup>
+                GET THIS ON:
+                <span class="aj-get-this-on" t-field="product.earliest_delivery_date"></span>
+               </sup>
+              </p>
+             </td>
+            </tr>
+           </t>
+          </tbody>
+         </table>
+        </div>
+        <div class="col-md-12 margin-top-10">
+         <sup>
+          ORDER BY:
+          <span class="aj-order-by">18:30</span>
+         </sup>
+         <sup>
+          GET THIS ON:
+          <span class="aj-get-this-on" t-field="product.earliest_delivery_date"></span>
+         </sup>
+        </div>
+        <div class="oe_structure" />
+        <t t-if="len(product.product_variant_ids) > 0">
+         <div class="col-md-12">
+          <div class="ip-product-undertable-buttons-wrapper clearfix">
+           <a type="button" class="btn ip-product-cart-button a-submit" id="add_to_cart">
+            <span class="btn-label">
+             <i class="ip-cart-icon"></i>
+            </span>
+            Add to Cart
+           </a>
+           <button t-if="product.auto_ship" id="ip-autoship" type="button" class="btn btn-disabled" data-title-add="Add to Auto-ship" data-title-remove="Remove Auto-ship">Add to Auto-ship</button>
+          </div>
+         </div>
+         <div class="oe_structure" />
+         <div id="freq_bought_together_products"></div>
+       
+<!--          <div> -->
+<!--           <div class="col-md-6 col-xs-12 ip-fbt-summary"> -->
+<!--            <div class="col-md-12 col-xs-12 no-padding-left ip-variants-count"> -->
+<!--             <span class="variants-count-selected">0</span> -->
+<!--             of -->
+<!--             <span class="variants-count-total">0</span> -->
+<!--             items selected -->
+<!--            </div> -->
+<!--            <div class="col-md-6 col-xs-6 no-padding-left ip-fbt-total-label">Total price:</div> -->
+<!--            <div class="col-md-6 col-xs-6 no-padding-right ip-fbt-total"> -->
+<!--             <t t-if="len(product.product_variant_ids) > 0"> -->
+<!--              <span t-field="product.product_variant_ids[0].lst_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span> -->
+<!--             </t> -->
+<!--            </div> -->
+<!--           </div> -->
+<!--          </div> -->
+        </t>
+        <div class="oe_structure" />
+        <div id="recommended_products"></div>
+        <div class="oe_structure" />
+       </t>
+      </div>
+     </div>
+    </div>
+    <div itemprop="description" t-field="product.website_description" class="oe_structure mt16" id="product_full_description" />
+     <div id="ip-product-reviews"></div>
+    <script type="text/javascript"> 
+    $(document).ready(function() { 
+      product_page_top_price = new Product_Page_Top_Price(); 
+      product_page_variants_table = new Product_Page_Variants_Table(); 
+      product_page_variants_undertable = new Product_Page_Variants_Undertable(); 
+      product_page_fbt = new Product_Page_FBT(); 
+      product_page_cab = new Product_Page_CAB(); 
+      product_page_cart_summary = new Product_Page_Cart_Summary(); 
+      product_autoship_button = new Product_Autoship_Button(); 
+      product_autoship_button.update(); 
+      product_image_gallery = new Product_Image_Gallery(); 
+      product_page_variants_table.select_first(); });
+    </script>
+   </t>
+  </template>
+ </data>
+</openerp>

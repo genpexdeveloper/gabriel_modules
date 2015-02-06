@@ -1,0 +1,68 @@
+@mixin ip-footer
+{
+	html
+	{
+		body
+		{
+			footer
+			{
+				padding-bottom: 30px;
+				h3
+				{
+					font-size: 16px;
+					color: #5bc1ff;
+					text-transform: uppercase;
+					padding-bottom: 12px;
+				}
+				img
+				{
+					display:block;
+					margin: 0 auto;
+				}
+				ul
+				{
+					line-height: 17px;
+					li
+					{
+						font-size: 12px;
+					}
+					&.ip-links
+					{
+						li
+						{
+							text-align: center;
+							a
+							{
+								color: #5bc1ff !important;
+								font-size: 14px;
+								line-height: 18px;
+							}
+						}
+					}
+				}
+				#credits
+				{
+					margin-top: 30px;
+					border-top: 3px double #000;
+				}
+
+				p
+				{
+					margin:0;
+					padding:0;
+					line-height: 18px;
+				}
+				.logo
+				{
+					display:block;
+					width:336px;
+					height:28px;
+					margin-top: 15px;
+					margin-bottom: 4px;
+					background-image: url('img/logo.png');
+				}
+
+			}
+		}
+	}
+}

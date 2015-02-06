@@ -1,0 +1,35 @@
+<openerp>
+	<data>
+
+        <record model="ir.ui.view" id="recurringDetailsWizard_form_view">
+            <field name="name">recurringDetailsWizard.form</field>
+            <field name="model">payment_adyenrecurring.recurringdetailswizard</field>
+            <field name="arch" type="xml">
+                <form string="Check details">
+                    <group>
+                        <field name="autoship_id" readonly="1"/>
+                        <field name="block_ids" readonly="1">
+                        	<tree>
+                        		<field name="recurringDetailReference"/>
+                        		<field name="variant"/>
+                        		<field name="creationDate"/>
+                        		<field name="holderName"/>
+                        		<field name="expiryMonth"/>
+                        		<field name="expiryYear"/>
+                        		<field name="cardNumber"/>
+                        	</tree>
+                    </field>
+                        	</group>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="retrieve_recurringdetails_wizard"
+                    name="Retrieve recurring Details"
+                    src_model="ip_web_addons.auto_ship"
+                    res_model="payment_adyenrecurring.recurringdetailswizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+	</data>
+</openerp>

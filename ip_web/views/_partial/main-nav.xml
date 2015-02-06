@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- MAIN NAVIGATION TEMPLATE -->
+  <template id="main_navigation" name="Main Navigation" inherit_id="ip_web.ip_layout" priority="20">
+   <xpath expr="//div[@id='ip-main-nav']" position="replace">
+    <nav class="navbar navbar-default ip-main-navigation" role="navigation">
+     <div class="ip-main-nav-left hidden-xs"></div>
+     <div class="ip-main-nav-right hidden-xs"></div>
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ip-main-navigation">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+      </button>
+     </div>
+     <div class="collapse navbar-collapse" id="ip-main-navigation">
+      <ul class="nav navbar-nav">
+       <t t-set="website_sale_categories" t-value="website.get_categories()" />
+       <t t-foreach="website_sale_categories" t-as="categ">
+        <li t-att-class="int(categ) == int(category or 0) and 'active' or ''">
+         <t t-if="categ.child_id">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" t-field="categ.name" t-att-title="categ.name"></a>
+          <div class="dropdown-menu">
+           <div class="col-md-7">
+            <h3 t-field="categ.name" />
+            <ul t-if="categ.child_id">
+             <t t-foreach="categ.child_id" t-as="categ">
+              <li>
+               <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name" t-att-title="categ.name"></a>
+              </li>
+             </t>
+            </ul>
+           </div>
+           <div class="col-md-5">
+            <h4>Popular Brands</h4>
+            <t t-call="ip_web.popular_brand_list" />
+           </div>
+           <div class="col-md-6"></div>
+           <div class="col-md-6"></div>
+           <div class="col-md-12 view-all">
+            <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name" t-att-title="categ.name"></a>
+           </div>
+          </div>
+         </t>
+         <t t-if="not categ.child_id and not categ.parent_id">
+          <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name"></a>
+         </t>
+        </li>
+       </t>
+       <li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Needs">Needs</a>
+        <div class="dropdown-menu">
+         <div class="col-md-7">
+          <h3>Needs</h3>
+          <ul>
+           <t t-set="attribute_ids" t-value="website.get_attribute_ids()" />
+           <t t-foreach="attribute_ids" t-as="attribute_id">
+            <!-- <t t-if="attribute_id.visible"> -->
+            <!-- <t t-if="attribute_id.value_ids and attribute_id.type == 'distinct'"> -->
+            <t t-if="attribute_id.name == 'Need'">
+             <t t-set="need_attr_id" t-value="attribute_id.id" />
+             <ul t-att-data="need_attr_id">
+              <t t-foreach="attribute_id.value_ids" t-as="value_id">
+               <t t-set="need_ids" t-valuef="#{need_ids},#{value_id.id}" />
+               <li>
+                <a t-attf-href="/shop?search=&amp;attrib=#{attribute_id.id}-#{value_id.id}" t-field="value_id.name" t-att-title="value_id.name"></a>
+               </li>
+              </t>
+             </ul>
+            </t>
+            <!-- </t> -->
+            <!-- </t> -->
+           </t>
+          </ul>
+         </div>
+        </div>
+       </li>
+      </ul>
+     </div>
+    </nav>
+   </xpath>
+  </template>
+ </data>
+</openerp>

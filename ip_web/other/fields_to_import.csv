@@ -1,0 +1,16 @@
+id,model,name,field_id/field_description,field_id/name,field_id/model,field_id/select_level,field_id/ttype,field_id/relation
+product.size,x_size,Product size,Name,x_name,x_size,Not Searchable,char,
+product.model_product_product,product.product,Product,Code LPP,x_code_lpp,product.product,Not Searchable,char,
+,,,Image,x_image2,product.product,Not Searchable,binary,
+,,,Image,x_image3,product.product,Not Searchable,binary,
+,,,Image,x_image4,product.product,Not Searchable,binary,
+,,,Image,x_image5,product.product,Not Searchable,binary,
+,,,Référence IP,x_new_ref,product.product,Not Searchable,char,
+,,,Quantity in pallet,x_pallet_quantity,product.product,Not Searchable,char,
+,,,Size,x_size,product.product,Not Searchable,many2one,x_size
+,,,Frequently Bought Together,x_substitute,product.product,Not Searchable,many2many,product.product
+,,,Waist measurement,x_waist,product.product,Not Searchable,char,
+,,,People who bought this item also bought,x_other_purchases,product.product,Not Searchable,many2many,product.product
+,,,Absorption,x_absorption,product.product,Not Searchable,float,
+,,,Bag quantity,x_bag_quantity,product.product,Not Searchable,integer,
+,,,Bag dimension,x_bag_dimension,product.product,Not Searchable,char,

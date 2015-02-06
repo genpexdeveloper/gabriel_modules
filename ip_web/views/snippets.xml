@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- HOMEPAGE SNIPPETS -->
+  <template id="custom_homepage_snippets" name="Custom Homepage Snippets" inherit_id="website.snippets">
+   <xpath expr="//ul[@class='nav navbar-nav nav-tabs']" position="inside">
+    <li>
+     <a href="#snippet-homepage" data-toggle="tab">Homepage</a>
+    </li>
+   </xpath>
+   <xpath expr="//div[@id='snippet_effect']" position="after">
+    <div id="snippet-homepage" class="tab-pane fade">
+     <!-- SNIPPET CATEGORIES -->
+     <div data-snippet-id="snippet-homepage-categories" data-selector-children=".ip-featured-categories">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">Feat. Categories</span>
+      </div>
+      <section class="oe_snippet_body">
+        <h3>Categories</h3>
+        <ul>
+         <t t-set="website_sale_categories" t-value="website.get_categories()" />
+         <t t-foreach="website_sale_categories" t-as="categ">
+          <li>
+           <a t-attf-href="/shop/category/#{ slug(categ) }/" t-esc="categ.name"></a>
+          </li>
+         </t>
+        </ul>
+       <div class="col-md-3 col-xs-6 ip-product">
+        <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+        <h3>Incontinence Légère</h3>
+        <ul>
+         <li>
+          <a href="#">Hartmann Confiance</a>
+         </li>
+         <li>
+          <a href="#">Abena Frantex Abri Flex</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Slipactiv</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Pants Super</a>
+         </li>
+        </ul>
+       </div>
+       <div class="col-md-3 col-xs-6 ip-product">
+        <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+        <h3>Incontinence Légère</h3>
+        <ul>
+         <li>
+          <a href="#">Hartmann Confiance</a>
+         </li>
+         <li>
+          <a href="#">Abena Frantex Abri Flex</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Slipactiv</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Pants Super</a>
+         </li>
+        </ul>
+       </div>
+       <div class="col-md-3 col-xs-6 ip-product">
+        <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+        <h3>Incontinence Légère</h3>
+        <ul>
+         <li>
+          <a href="#">Hartmann Confiance</a>
+         </li>
+         <li>
+          <a href="#">Abena Frantex Abri Flex</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Slipactiv</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Pants Super</a>
+         </li>
+        </ul>
+       </div>
+       <div class="col-md-3 col-xs-6 ip-product">
+        <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+        <h3>Incontinence Légère</h3>
+        <ul>
+         <li>
+          <a href="#">Hartmann Confiance</a>
+         </li>
+         <li>
+          <a href="#">Abena Frantex Abri Flex</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Slipactiv</a>
+         </li>
+         <li>
+          <a href="#">Ontex-ID Pants Super</a>
+         </li>
+        </ul>
+       </div>
+      </section>
+     </div>
+    </div>
+   </xpath>
+  </template>
+  <!-- PRODUCTS PAGE SNIPPETS -->
+  <template id="custom_products_snippets" name="Custom Products Snippets" inherit_id="website.snippets">
+   <xpath expr="//ul[@class='nav navbar-nav nav-tabs']" position="inside">
+    <li>
+     <a href="#snippet-product" data-toggle="tab">Product</a>
+    </li>
+   </xpath>
+   <xpath expr="//div[@id='snippet_effect']" position="after">
+    <div id="snippet-product" class="tab-pane fade">
+     <!-- PRODUCT DESCRIPTION -->
+     <div data-snippet-id="snippet-product-description" data-selector-children=".ip-product-description-area">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">Desc. Widget</span>
+      </div>
+      <section class="oe_snippet_body ip-product-description">
+       <p class="ip-section-title">title</p>
+       <p>Content...</p>
+      </section>
+     </div>
+    </div>
+   </xpath>
+  </template>
+  <!-- SIDEBAR SNIPPETS TAB -->
+  <template id="sidebar-categories" inherit_id="website.snippets">
+   <xpath expr="//ul[@class='nav navbar-nav nav-tabs']" position="inside">
+    <li>
+     <a href="#snippet-sidebar-categories" data-toggle="tab">Sidebar Widgets</a>
+    </li>
+    <li>
+     <a href="#snippet-footer" data-toggle="tab">Footer</a>
+    </li>
+   </xpath>
+   <xpath expr="//div[@id='snippet_effect']" position="after">
+    <div id="snippet-sidebar-categories" class="tab-pane fade">
+     <!-- SIDEBAR CATEGORIES -->
+     <div data-snippet-id="snippet-sidebar-categories" data-selector-children=".widget-area">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">Categories list</span>
+      </div>
+      <section class="oe_snippet_body">
+       <h3>Categories</h3>
+       <ul>
+        <t t-set="website_sale_categories" t-value="website.get_categories()" />
+        <t t-foreach="website_sale_categories" t-as="categ">
+         <li>
+          <a t-attf-href="/shop/category/#{ slug(categ) }/" t-esc="categ.name"></a>
+         </li>
+        </t>
+       </ul>
+      </section>
+     </div>
+     <!-- SIDEBAR TEMPLATE (inside widget) -->
+     <div data-snippet-id="snippet-sidebar-template" data-selector-children=".widget-area">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">Custom widget list</span>
+      </div>
+      <section class="oe_snippet_body">
+       <h3>Title</h3>
+       <ul>
+        <li>
+         <a href="#">Link #1</a>
+        </li>
+        <li>
+         <a href="#">Link #2</a>
+        </li>
+        <li>
+         <a href="#">Link #3</a>
+        </li>
+       </ul>
+      </section>
+     </div>
+     <!-- SIDEBAR WIDGET TEMPLATE -->
+     <div data-snippet-id="snippet-sidebar-template" data-selector-children=".ip-sidebar-widget-placeholder">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">Widget</span>
+      </div>
+      <section class="oe_snippet_body widget oe_structure">
+       <header>
+        <h2>Title</h2>
+       </header>
+       <main class="widget-area"></main>
+       <footer></footer>
+      </section>
+     </div>
+    </div>
+   </xpath>
+   <!-- FOOTER SNIPPETS TAB -->
+   <xpath expr="//div[@id='snippet_effect']" position="after">
+    <div id="snippet-footer" class="tab-pane fade">
+     <!-- 4 COLUMN LINKS -->
+     <div data-snippet-id="snippet-footer-4-col-links" data-selector-children=".ip-footer-area">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">4 col. links</span>
+      </div>
+      <section class="oe_snippet_body ip-product-description">
+       <div class="row">
+        <div class="col-md-12">
+         <div class="col-md-3 col-xs-6">
+          <h3>Title #1:</h3>
+          <ul>
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <h3>Title #2:</h3>
+          <ul>
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <h3>Title #3:</h3>
+          <ul>
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <h3>Title #3:</h3>
+          <ul>
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </section>
+     </div>
+     <!-- 4 COLUMN LINKS WITH IMAGES -->
+     <div data-snippet-id="snippet-footer-4-col-links" data-selector-children=".ip-footer-area">
+      <div class="oe_snippet_thumbnail">
+       <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_panel.png" />
+       <span class="oe_snippet_thumbnail_title">4 col. image/links</span>
+      </div>
+      <section class="oe_snippet_body ip-product-description">
+       <div class="row">
+        <div class="col-md-12">
+         <div class="col-md-3 col-xs-6">
+          <img src="/ip_web/static/src/css/img/pics/tena-logo.png" />
+          <ul class="ip-links">
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <img src="/ip_web/static/src/css/img/pics/hartmann-logo.png" />
+          <ul class="ip-links">
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <img src="/ip_web/static/src/css/img/pics/abena-logo.png" />
+          <ul class="ip-links">
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+         <div class="col-md-3 col-xs-6">
+          <img src="/ip_web/static/src/css/img/pics/id-logo.png" />
+          <ul class="ip-links">
+           <li>
+            <a href="#">Link #1</a>
+           </li>
+           <li>
+            <a href="#">Link #2</a>
+           </li>
+           <li>
+            <a href="#">Link #3</a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </section>
+     </div>
+    </div>
+   </xpath>
+  </template>
+ </data>
+</openerp>

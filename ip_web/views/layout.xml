@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- DELETE UNREQUIRED DEFAULT TEMPLATES -->
+  <delete model="ir.ui.view" id="website.footer_custom" />
+  <delete model="ir.ui.view" id="website.layout_logo_show" />
+  <!-- REMOVE THEME CSS -->
+  <template id="website.theme" />
+  <!-- REMOVE SOME JS -->
+  <template id="assets_frontend" inherit_id="website.assets_frontend">
+   <xpath expr="//script[@src='/web/static/lib/bootstrap/js/bootstrap.js']" position="replace" />
+  </template>
+<template id="website.editor_head" inherit_id="website.layout" name="Editor" groups="base.group_website_publisher,base.group_website_designer">
+    <xpath expr='//t[@t-call-assets="website.assets_frontend"][@t-js]' position="after">
+        <t t-call-assets="website.assets_editor" t-js=""/>
+    </xpath>
+    <xpath expr='//t[@t-call-assets="website.assets_frontend"][@t-css]' position="after">
+        <t t-call-assets="website.assets_editor" t-css=""/>
+    </xpath>
+</template>
+
+
+  <!-- MAIN LAYOUT TEMPLATE -->
+  <template id="ip_layout" name="IP Main Layout" inherit_id="website.layout">
+    <xpath expr='//t[@t-call-assets="web.assets_common"][@t-js]' position="attributes">
+      <attribute name="t-js"></attribute>
+        </xpath>
+      <xpath expr='//t[@t-call-assets="website.assets_frontend"][@t-js]' position="attributes">
+        <attribute name="t-js"></attribute>
+      </xpath>
+   <!-- INCLUDE THEME CSS AND JS -->
+   <xpath expr="//head" position="inside">
+    <!-- THEME -->
+    <link rel="stylesheet" href="/ip_web/static/src/css/ip.css" />
+    <link rel="shortcut icon" href="/ip_web/static/src/css/img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/ip_web/static/src/css/img/touch-icons/touch-icon-iphone-60x60.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/ip_web/static/src/css/img/touch-icons/touch-icon-ipad-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/ip_web/static/src/css/img/touch-icons/touch-icon-iphone-retina-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/ip_web/static/src/css/img/touch-icons/touch-icon-ipad-retina-152x152.png" />
+    <script type="text/javascript">ip_currency = '<t t-esc="website.pricelist_id.currency_id.symbol" />';</script>
+    <script src="/ip_web/static/src/js/original/jquery-ui-1.9.2.min.js"></script>
+    <script src="/ip_web/static/src/js/original/backbone.js"></script>
+    <script src="/ip_web/static/src/js/original/bootstrap.min.js"></script>
+    <script src="/ip_web/static/src/js/original/moment-with-langs.min.js"></script>
+    <script src="/ip_web/static/src/js/original/bootstrap-datepicker.js"></script>
+    <script src="/ip_web/static/src/js/original/jquery.fancybox.pack.js"></script>
+    <script src="/ip_web/static/src/js/original/account.js"></script>
+    <script src="/ip_web/static/src/js/original/product.js"></script>
+    <script src="/ip_web/static/src/js/original/ip.js"></script>
+    <!-- <script src="/ip_web/static/src/js/main.min.js"></script> -->
+    <script type="text/javascript"> removeJsCssFile('/web/static/lib/bootstrap/css/bootstrap.css', 'css'); removeJsCssFile('/website_sale/static/src/css/website_sale.css', 'css');</script>
+   </xpath>
+   <!-- REPLACE BODY -->
+   <xpath expr="//body" position="replace">
+    <body>
+     <div id="wrapwrap">
+      <!-- WEBSITE HEADER -->
+      <header>
+       <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+         <div class="row">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header pull-right">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ip-header-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+           </button>
+           <!-- TOP CART PLACEHOLDER -->
+           <div id="ip-top-cart">
+            <ul class="header-cart pull-left">
+             <li class="header-cart-logo"></li>
+             <li class="header-cart-contents">
+              <p class="ip-header-cart-title">My shopping cart</p>
+              <p>
+               <span class="header-cart-incart">0</span>
+               item(s) -
+               <span class="header-cart-amount">0 €</span>
+              </p>
+             </li>
+             <li>
+              <button class="header-cart-btn-checkout" onclick="window.location = '/shop/cart';">Checkout</button>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <div class="collapse navbar-collapse pull-left" id="ip-header-navigation">
+           <ul id="top_menu" class="nav navbar-nav">
+            <li class="divider" groups="base.group_user,base.group_portal" t-ignore="true" />
+            <li class="dropdown" t-ignore="true" groups="base.group_user,base.group_portal">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <b>
+               <span t-esc="user_id.name" />
+               <span class="caret" />
+              </b>
+             </a>
+             <ul class="dropdown-menu js_usermenu" role="menu">
+              <li>
+               <a href="/account/" role="menuitem">My Account</a>
+              </li>
+              <li class="divider" />
+              <li>
+               <a t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
+              </li>
+             </ul>
+            </li>
+           </ul>
+          </div><!-- /.navbar-collapse -->
+         </div>
+        </div>
+       </nav>
+      </header>
+      <div id="wrapper" class="container">
+       <main class="clearfix">
+        <header>
+         <ul class="ip-main-header-nav clearfix">
+          <li class="ip-header-nav-contact">
+           CONTACT US:
+           <strong>+33 (0) 1 43 06 60 06</strong>
+          </li>
+          <t t-foreach="website.menu_id.child_id" t-as="submenu">
+           <t t-call="website.submenu" />
+          </t>
+         </ul>
+         <div class="row">
+          <div class="col-md-5 col-xs-12">
+           <a class="navbar-brand" href="#"></a>
+          </div>
+          <!-- TOP SEARCH FIELD PLACEHOLDER -->
+          <div id="ip-top-search">
+           <form role="search" method="get" action="/shop/">
+            <div class="col-md-7 col-xs-12">
+             <div class="col-md-5 input-group ip-search-form">
+              <input type="text" name="search" class="form-control" />
+              <span class="input-group-btn">
+               <button class="btn btn-default" type="submit"> Search
+               </button>
+              </span>
+             </div><!-- /input-group -->
+            </div>
+           </form>
+          </div>
+         </div>
+         <!-- MAIN NAVIGATION PLACEHOLDER -->
+         <div id="ip-main-nav" class="row">
+          <nav class="navbar navbar-default ip-main-navigation" role="navigation">
+           <div class="ip-main-nav-left hidden-xs"></div>
+           <div class="ip-main-nav-right hidden-xs"></div>
+           <!-- Brand and toggle get grouped for better mobile display -->
+           <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ip-main-navigation">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+            </button>
+           </div>
+           <div class="collapse navbar-collapse" id="ip-main-navigation">
+            <ul class="nav navbar-nav">
+             <!-- <t t-set="website_sale_categories" t-value="website.get_categories()" /> -->
+             <!-- <t t-foreach="website_sale_categories" t-as="categ"> -->
+             <!-- <li t-att-class="int(categ) == int(category or 0) and 'active' or ''"> -->
+             <!-- <t t-if="categ.child_id"> -->
+             <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" t-field="categ.name" t-att-title="categ.name"></a> -->
+             <!-- <div class="dropdown-menu"> -->
+             <!-- <div class="col-md-7"> -->
+             <!-- <h3 t-field="categ.name" /> -->
+             <!-- <ul t-if="categ.child_id"> -->
+             <!-- <t t-foreach="categ.child_id" t-as="categ"> -->
+             <!-- <li> -->
+             <!-- <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name" t-att-title="categ.name"></a> -->
+             <!-- </li> -->
+             <!-- </t> -->
+             <!-- </ul> -->
+             <!-- </div> -->
+             <!-- <div class="col-md-5"> -->
+             <!-- <h4>Popular Brands</h4> -->
+             <!-- <t t-call="ip_web.popular_brand_list" /> -->
+             <!-- </div> -->
+             <!-- <div class="col-md-6"></div> -->
+             <!-- <div class="col-md-6"></div> -->
+             <!-- <div class="col-md-12 view-all"> -->
+             <!-- <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name" t-att-title="categ.name"></a> -->
+             <!-- </div> -->
+             <!-- </div> -->
+             <!-- </t> -->
+             <!-- <t t-if="not categ.child_id and not categ.parent_id"> -->
+             <!-- <a t-attf-href="/shop/category/#{ slug(categ) }/" t-field="categ.name"></a> -->
+             <!-- </t> -->
+             <!-- </li> -->
+             <!-- </t> -->
+             <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Needs">Needs</a>
+              <div class="dropdown-menu">
+               <div class="col-md-7">
+                <h3>Needs</h3>
+                <ul>
+                 <t t-set="attribute_ids" t-value="website.get_attribute_ids()" />
+                 <h1 t-raw="attribute_ids"></h1>
+                 <t t-foreach="attribute_ids" t-as="attribute_id">
+                  <t t-if="attribute_id.visible">
+                   <t t-if="attribute_id.value_ids and attribute_id.type == 'distinct'">
+                    <t t-if="attribute_id.name == 'Need'">
+                     <t t-set="need_attr_id" t-value="attribute_id.id" />
+                     <ul t-att-data="need_attr_id">
+                      <t t-foreach="attribute_id.value_ids" t-as="value_id">
+                       <t t-set="need_ids" t-valuef="#{need_ids},#{value_id.id}" />
+                       <li>
+                        <a t-attf-href="/shop/?filters=[[#{attribute_id.id},#{value_id.id}]]" t-field="value_id.name" t-att-title="value_id.name"></a>
+                       </li>
+                      </t>
+                     </ul>
+                    </t>
+                   </t>
+                  </t>
+                 </t>
+                </ul>
+               </div>
+              </div>
+             </li>
+            </ul>
+           </div>
+          </nav>
+         </div>
+        </header>
+        <div class="row">
+         <t t-raw="0" />
+        </div>
+       </main>
+      </div>
+      <div class="container">
+       <div class="row">
+        <div class="col-md-12">
+         <div class="row">
+          <div class="triangle dark animate">
+           <span class="triangle">▼</span>
+          </div>
+         </div>
+        </div>
+        <!-- WEBSIE FOOTER -->
+        <footer id="footer_container">
+         <div class="ip-footer-area">
+          <section class="ip-product-description" data-snippet-id="snippet-footer-4-col-links">
+           <div class="row">
+            <div class="col-md-12" data-snippet-id="colmd">
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #1:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #2:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #3:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #3:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </section>
+          <section class="ip-product-description" data-snippet-id="snippet-footer-4-col-links">
+           <div class="row">
+            <div class="col-md-12" data-snippet-id="colmd">
+             <div class="col-md-3 col-xs-6">
+              <img src="/ip_web/static/src/css/img/pics/tena-logo.png" />
+              <ul class="ip-links">
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <img src="/ip_web/static/src/css/img/pics/hartmann-logo.png" />
+              <ul class="ip-links">
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <img src="/ip_web/static/src/css/img/pics/abena-logo.png" />
+              <ul class="ip-links">
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <img src="/ip_web/static/src/css/img/pics/id-logo.png" />
+              <ul class="ip-links">
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </section>
+          <section class="ip-product-description" data-snippet-id="snippet-footer-4-col-links">
+           <div class="row">
+            <div class="col-md-12" data-snippet-id="colmd">
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #1:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #2:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #3:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+             <div class="col-md-3 col-xs-6">
+              <h3>Title #3:</h3>
+              <ul>
+               <li>
+                <a href="#">Link #1</a>
+               </li>
+               <li>
+                <a href="#">Link #2</a>
+               </li>
+               <li>
+                <a href="#">Link #3</a>
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </section>
+         </div>
+         <div class="row">
+          <div class="col-md-12">
+           <div class="col-md-12">
+            <div id="credits" class="col-md-12">
+             <a class="navbar-brand" href="#"></a>
+             <p>© 2005 - 2014 Incontinence-protection.com</p>
+             <p>101 rue de Prony, 75017</p>
+             <p>+33 (0) 1 43 60 60 06</p>
+             <p>Paris, France</p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </footer>
+       </div>
+      </div>
+      <t t-if="website.google_analytics_key">
+       <script>
+        (function(b, o, i, l, e, r) { b.GoogleAnalyticsObject = l; b[l] || (b[l] = function() { (b[l].q = b[l].q || []).push(arguments) }); b[l].l = +new Date; e = o.createElement(i); r = o.getElementsByTagName(i)[0]; e.src = '//www.google-analytics.com/analytics.js'; r.parentNode.insertBefore(e, r) }(window, document, 'script', 'ga')); ga('create', '
+        <t t-esc="website.google_analytics_key" />
+        '); ga('send', 'pageview');
+       </script>
+      </t>
+     </div>
+     <div class="modal fade" id="aj-non-autoship-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+         <h4 class="modal-title" id="myModalLabel">The order cannot be autoshipped!</h4>
+        </div>
+        <div class="modal-body"> The order can not be autoshipped because the cart is empty or there are any products in the cart that can not be autoshipped.
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="modal fade" id="aj-cant-add-to-cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+         <h4 class="modal-title" id="myModalLabel">You can add this product to the cart!</h4>
+        </div>
+        <div class="modal-body"> The order can not be added because the cart already contains an autoshipped product.
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- AUTOSHIP MODAL -->
+     <div class="modal fade" id="aj-autoship-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+         <h4 class="modal-title" id="myModalLabel">Please fill autoship details</h4>
+        </div>
+        <div class="modal-body">
+         <div class="row">
+          <span class="pull-left aj-interval-title margin-right-15">Order every</span>
+          <div class="pull-left input-group col-md-3 ip-number-group">
+           <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+             <span class="glyphicon glyphicon-minus"></span>
+            </button>
+           </span>
+           <input id="aj-as-interval" type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10" readonly="readonly" data-step="1" />
+           <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+             <span class="glyphicon glyphicon-plus"></span>
+            </button>
+           </span>
+          </div>
+          <span class="pull-left aj-interval-title margin-left-15">weeks</span>
+         </div>
+         <div class="row">
+          <p>
+           End date
+           <span class="ip-required">*</span>
+          </p>
+          <div class="input-group col-md-5">
+           <input type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="aj-as-end-date" />
+           <span class="input-group-addon">
+            <i class="glyphicon glyphicon-calendar"></i>
+           </span>
+          </div>
+         </div>
+         <br />
+         <div class="row">
+          <p>When you want to validate your autoship, click on Checkout at the top of the screen to open your cart.</p>
+         </div>
+        </div>
+        <div class="modal-footer">
+         <button type="button" id="aj-autoship-confirm" class="btn btn-primary">Add Autoship</button>
+         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- ERROR MODAL -->
+     <div class="modal fade" id="aj-error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+         <h4 class="modal-title" id="myModalLabel">
+          <span class="ip-error-modal-title">Cannot complete your request</span>
+         </h4>
+        </div>
+        <div class="modal-body">
+         <p>There was a problem completing your request.</p>
+         <p>Please refresh the browser and try again.</p>
+         <p>If the problem persists please contact staff.</p>
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </body>
+   </xpath>
+  </template>
+  <!-- HEADER LOGO TEMPLATE -->
+  <template id="layout_header_logo" inherit_id="ip_web.ip_layout" name="Show Header Logo">
+   <xpath expr="//header//a[@class='navbar-brand']" position="replace">
+    <a href="/" class="navbar-brand logo">
+     <img class="img img-responsive" src="/logo.png" t-att-alt="title" />
+    </a>
+   </xpath>
+  </template>
+  <!-- FOOTER LOGO TEMPLATE -->
+  <template id="layout_footer_logo" inherit_id="ip_web.ip_layout" name="Show Footer Logo">
+   <xpath expr="//div[@id='credits']//a[@class='navbar-brand']" position="replace">
+    <div class="ip-footer-logo-wrapper clearfix">
+     <a href="/" class="navbar-brand logo">
+      <img class="img img-responsive" src="/logo.png" t-att-alt="title" />
+     </a>
+    </div>
+   </xpath>
+  </template>
+  <!-- HIDE FOOTER LINKS FOR MOBILE TEMPLATE -->
+  <template id="layout_footer_hide_links_for_mobile" inherit_id="ip_web.ip_layout" name="Hide Footer Links for Mobile">
+   <xpath expr="//head" position="inside">
+    <style> @media (max-width: 768px) { .ip-footer-area { display: none !important; } }
+    </style>
+   </xpath>
+  </template>
+ </data>
+</openerp>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- TOP SEARCH FIELD TEMPLATE -->
+        <template id="top_search" name="Top Search Field" inherit_id="ip_web.ip_layout" priority="20">
+            <xpath expr="//div[@id='ip-top-search']" position="replace">
+                <form role="search" method="get" action="/shop/">
+                    <div class="col-md-7 col-xs-12">
+                        <div class="col-md-5 input-group ip-search-form">
+                            <input type="text" name="search" class="form-control" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    Search
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </xpath>
+        </template>
+    </data>
+</openerp>

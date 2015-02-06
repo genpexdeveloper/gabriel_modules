@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- 'Validate Order" INFO BLOCK TEMPLATE -->
+        <template id="validate-order" name="Validate Order" inherit_id="website_sale.payment">
+            <xpath expr="//div[@class='col-lg-8 col-sm-9 oe_cart']" position="attributes">
+                <attribute name="class">col-lg-8 col-sm-9 col-md-9 col-xs-12 oe_cart</attribute>
+            </xpath>
+
+            <xpath expr="//div[@id='right_column']" position="attributes">
+                <attribute name="class">col-lg-4 col-md-3 text-muted col-lg-3</attribute>
+            </xpath>
+        </template>
+
+        <!-- 'YOUR ORDER" INFO BLOCK TEMPLATE -->
+<!--         <template id="your-order" name="Your Order" inherit_id="website_sale.checkout"> -->
+<!--             <xpath expr="//div[@class='col-lg-offset-1 col-lg-3 col-md-3 text-muted']" position="replace"> -->
+<!--                 <div class="col-lg-offset-1 col-lg-3 col-md-3 text-muted"> -->
+<!--                     <h3 class="page-header mt16">Your Order<small><a href="/shop/mycart"><span class="fa fa-arrow-right"/> change</a></small></h3> -->
+<!--                     <div class="row"> -->
+<!--                         <div class="col-sm-6 col-xs-6">Subtotal:</div> -->
+<!--                         <div class="col-sm-6 col-xs-6"><span t-field="website_sale_order.amount_untaxed" t-field-options='{ -->
+<!--                                "widget": "monetary", -->
+<!--                                "display_currency": "website.pricelist_id.currency_id"  -->
+<!--                           }'/></div>  -->
+<!--                         <div class="col-sm-6 col-xs-6">Taxes:</div> -->
+<!--                         <div class="col-sm-6 col-xs-6"><span t-field="website_sale_order.amount_tax" t-field-options='{ "widget": "monetary", "display_currency": "website.pricelist_id.currency_id"}'/></div>  -->
+<!--                         <div class="col-sm-6 col-xs-6"><h4>Total To Pay:</h4></div> -->
+<!--                         <div class="col-sm-6 col-xs-6"><h4><span t-field="website_sale_order.amount_total" t-field-options='{ "widget": "monetary","display_currency": "website.pricelist_id.currency_id"}'/></h4></div>  -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </xpath> -->
+<!--         </template> -->
+
+        <!-- DELETE UNREQUIRED DEFAULT TEMPLATES -->
+        <delete model="ir.ui.view" id="website_sale.continue_shopping"/>
+
+        <!-- CHECKOUT TOTAL BLOCK TEMPLATE -->
+        <template id="total" name="IP Checkout Total" inherit_id="website_sale.total">
+	        <xpath expr="//table" position="replace">            
+                <table class='pull-right mb16' id="cart_total" t-if="website_sale_order">
+			        <thead>
+			            <tr width="100" style="border-top: 1px solid #000" id="order_total">
+			                <th><h3>Total:</h3></th>
+			                <th class="text-right">
+			                  <h3><span t-field="website_sale_order.amount_total" t-field-options='{"widget": "monetary", "display_currency": "website.pricelist_id.currency_id"}'/></h3>
+			                </th>
+			            </tr>
+			            <tr width="120" class="text-muted" id="order_total_taxes">
+			                <td><abbr title="Taxes may be updated after providing shipping address">Taxes:</abbr></td>
+			                <td class="text-right">
+			                    <span t-field="website_sale_order.amount_tax" t-field-options='{ "widget": "monetary", "display_currency": "website.pricelist_id.currency_id"}'/> 
+			                </td>
+			            </tr>
+			        </thead>
+			    </table>
+            </xpath>
+        </template>
+
+        <!-- CART TEMPLATE -->
+        <template id="mycart" name="Your Cart" inherit_id="website_sale.cart">
+        	<xpath expr="//t[@t-call='website_sale.total']" position="replace">
+        		<t t-call="website_sale.total"/>
+        		<div class="clearfix" />
+				<div class="col-md-12 ip-product-undertable-buttons-wrapper ip-mycart-undertable">
+					<div class="oe_structure" />
+					<div class="aj-autoship-details">
+						<p><strong>Autoship interval (weeks):</strong> <span class="aj-autoship-details-interval"></span></p>
+						<p><strong>Autoship end date:</strong> <span class="aj-autoship-details-end-date"></span></p>
+					</div>
+					<div class="oe_structure" />
+	        	    <button id="ip-autoship" data-disable-if-empty-cart="true" type="button" class="btn btn-disabled pull-left" data-title-add="Add to Auto-ship" data-title-remove="Remove Auto-ship">Add to Auto-ship</button>  
+				</div>
+				<script type="text/javascript">
+                    $(document).ready(function() {
+                        product_autoship_button = new Product_Autoship_Button();
+                        product_autoship_button.update();
+                    });
+                </script>
+        	</xpath>
+		</template>
+    </data>
+</openerp>

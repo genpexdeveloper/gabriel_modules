@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="adyen_recurring_acquirer_button" inherit_id="payment_adyen.adyen_acquirer_button">
+            <xpath expr="//input[@name='sessionValidity']" position="after">
+                <input t-if="tx_values.get('shopperReference')" type="hidden" name="shopperEmail" t-att-value="tx_values.get('shopperEmail')"/>
+                <input t-if="tx_values.get('shopperReference')" type="hidden" name="shopperReference" t-att-value="tx_values.get('shopperReference')"/>
+                <input t-if="tx_values.get('shopperReference')" type="hidden" name="recurringContract" t-att-value="tx_values.get('recurringContract')"/>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

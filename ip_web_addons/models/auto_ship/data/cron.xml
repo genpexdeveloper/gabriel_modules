@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="ip_web_addons_auto_ship_cron" model="ir.cron">
+            <field name="name">IP Auto Ship Processing</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'ip_web_addons.auto_ship'" />
+            <field name="function" eval="'do_all_auto_ships'" />
+            <field name="args" eval="'()'" />
+        </record>
+
+    </data>
+</openerp>

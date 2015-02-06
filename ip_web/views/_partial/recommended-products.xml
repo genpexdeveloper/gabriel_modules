@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- Product option: related / recommended products -->
+  <template id="recommended_products" inherit_id="website_sale.product" priority="20" name="IP Recommended Products">
+   <xpath expr="//div[@id='recommended_products']" position="replace">
+    <div id="ip-cab">
+     <t t-foreach="product.product_variant_ids" t-as="variant">
+      <div class="col-md-12 col-xs-12 ip-cab" t-attf-data-variant-id="#{variant.id}" t-attf-data-fbt-total="#{len(variant.x_other_purchases)}">
+       <t t-if="len(variant.x_other_purchases) > 0">
+        <h2 class="ip-h2">Customers Who Bought This Item Also Bought</h2>
+        <t t-set="sub_iter" t-value="0" />
+        <t t-foreach="variant.x_other_purchases" t-as="product">
+         <t t-set="sub_iter" t-value="sub_iter + 1" />
+         <t t-if="sub_iter &lt; 4">
+          <div class="col-md-4 col-xs-4 ip-cab-item ip-border-right-dotted">
+           <span t-field="product.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;}" />
+           <p><span t-field='product.name'></span> <!--  - <span t-field='product.product_variant_ids'></span> --></p>
+           <div class="row">
+            <div class="col-md-5 col-xs-12 ip-cab-item-price">
+             <span t-field="product.product_variant_ids[0].lst_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: &quot;website.pricelist_id.currency_id&quot;}"></span>
+            </div>
+            <div class="col-md-7 col-xs-12 ip-cab-item-add">
+             <a title="add to cart" href="#" class="btn btn-xs btn-primary ip-link-add-to-cart a-submit" style="color:rgb(255,255,255) !important" t-att-data-id="product.id" t-att-data-autoship="str(product.auto_ship)">add to cart</a>
+            </div>
+           </div>
+          </div>
+         </t>
+        </t>
+       </t>
+      </div>
+     </t>
+    </div>
+   </xpath>
+  </template>
+ </data>
+</openerp>

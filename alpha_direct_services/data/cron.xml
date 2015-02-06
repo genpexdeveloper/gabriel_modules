@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="">
+    <!--
+        <record id="ir_cron_ads_poll" model="ir.cron">
+            <field name="name">Poll Alpha Direct Service Server</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'ads.manager'" />
+            <field name="function" eval="'poll'" />
+            <field name="args" eval="'()'" />
+        </record>
+
+        <record id="ir_cron_ads_upload_pickings" model="ir.cron">
+            <field name="name">Upload Sales/Purchase Orders to ADS</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'stock.picking'" />
+            <field name="function" eval="'cron_upload_to_ads'" />
+            <field name="args" eval="'()'" />
+        </record>
+    -->
+        <!-- Delete old crons first -->
+        <delete id="ir_cron_ads_poll" model="ir.cron"/>
+        <delete id="ir_cron_ads_upload_pickings" model="ir.cron"/>
+
+        <record id="ir_cron_synch_ads" model="ir.cron">
+            <field name="name">Synchronise with ADS</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'ads_cron_manager'" />
+            <field name="function" eval="'sync_ads'" />
+            <field name="args" eval="'()'" />
+        </record>
+
+    </data>
+</openerp>

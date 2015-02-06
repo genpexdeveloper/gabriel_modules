@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="aydenrecurring_autoship" model="ir.ui.view">
+            <field name="name">autoship.form.aydenrecurring_autoship</field>
+            <field name="model">ip_web_addons.auto_ship</field>
+            <field name="inherit_id" ref="ip_web_addons.ip_web_addons_auto_ship_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number_remaining']" position="after">
+                    <field name="shopperReference" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

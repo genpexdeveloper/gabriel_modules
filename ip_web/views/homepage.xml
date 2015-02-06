@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <!-- HOMEPAGE TEMPLATE -->
+  <template id="homepage" name="IP Homeage" inherit_id="website.homepage">
+   <xpath expr="//div[@id='wrap']" position="inside">
+    <!-- SIDEBAR PLACEHOLDER -->
+    <div id="ip-sidebar"></div>
+    <!-- MAIN CONTENT -->
+    <div id="ip-main" class="col-md-12">
+     <div class="col-md-12 oe_structure" />
+     <div class="col-md-12 promo">
+      <div id="myCarousel5" style="height: 352px;" class="carousel slide mb32" data-snippet-id="carousel">
+       <ol class="carousel-indicators hidden">
+        <li data-slide-to="0" class="active" data-target="#myCarousel5"></li>
+       </ol>
+       <div class="carousel-inner">
+        <div style="background-image: url('/website/static/src/img/banner/color_splash.jpg')" class="item image_text active">
+         <div class="container">
+          <div class="carousel-caption content">
+           <div>
+            <h2>Your Banner Title</h2>
+            <h3>Click to customize this text</h3>
+            <p>
+             <a title="Contact Us" href="/page/website.contactus" class="btn btn-success btn-large">Contact us</a>
+            </p>
+           </div>
+          </div>
+          <img src="/website/static/src/img/banner/banner_picture.png" alt="Banner OpenERP Image" class="carousel-image hidden-xs" />
+         </div>
+        </div>
+       </div>
+       <a data-slide="prev" href="#myCarousel5" style="width: 10%" class="carousel-control left hidden">
+        <span class="glyphicon glyphicon-chevron-left">
+         <span class="hidden">.</span>
+        </span>
+       </a>
+       <a data-slide="next" href="#myCarousel5" style="width: 10%" class="carousel-control right hidden">
+        <span class="glyphicon glyphicon-chevron-right">
+         <span class="hidden">.</span>
+        </span>
+       </a>
+      </div>
+     </div>
+     <div class="col-md-12 ip-featured-categories">
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 ip-product">
+       <img class="ip-product-image" src="/ip_web/static/src/css/img/pics/item.png" />
+       <h3>Incontinence Légère</h3>
+       <ul>
+        <li>
+         <a href="#">Hartmann Confiance</a>
+        </li>
+        <li>
+         <a href="#">Abena Frantex Abri Flex</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Slipactiv</a>
+        </li>
+        <li>
+         <a href="#">Ontex-ID Pants Super</a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="col-md-12 oe_structure" />
+    </div>
+   </xpath>
+  </template>
+  <!-- HOMEPAGE SIDEBAR TEMPLATE -->
+  <template id="homepage_sidebar" name="Homepage Sidebar" inherit_id="ip_web.homepage">
+   <!-- INCLUDE SIDEBAR -->
+   <xpath expr="//div[@id='ip-sidebar']" position="replace">
+    <!-- SIDEBAR -->
+    <div id="ip-sidebar" class="col-md-3 col-xs-12 hidden-xs" >
+     <div class="ip-sidebar-widget-placeholder" />
+     <!-- WIDGET -->
+     <div class="widget">
+      <header>
+       <h2>Shop By:</h2>
+      </header>
+      <main class="widget-area">
+       <!--section data-snippet-id="snippet-sidebar-categories">
+        <h3>Categories</h3>
+        <ul>
+         <t t-set="website_sale_categories" t-value="website.get_categories()" />
+         <t t-foreach="website_sale_categories" t-as="categ">
+          <li>
+           <a t-attf-href="/shop/category/#{ slug(categ) }/" t-esc="categ.name"></a>
+          </li>
+         </t>
+        </ul>
+       </section-->
+      </main>
+      <footer></footer>
+     </div>
+     <div class="ip-sidebar-widget-placeholder" />
+    </div>
+   </xpath>
+   <!-- CHANGE MAIN CONTENT BLOCK WIDTH -->
+   <xpath expr="//div[@id='ip-main']" position="attributes">
+    <attribute name="class">col-md-9</attribute>
+   </xpath>
+  </template>
+ </data>
+</openerp>

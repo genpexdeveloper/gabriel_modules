@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- TOP NAVIGATION TEMPLATE -->
+        <template id="top_cart" name="Top Cart" inherit_id="ip_web.ip_layout" priority="20">
+            <xpath expr="//div[@id='ip-top-cart']" position="replace">
+                <ul class="header-cart pull-left">
+                    <li class="header-cart-logo"></li>
+                    <li class="header-cart-contents">
+                        <p class="ip-header-cart-title">My shopping cart</p>
+                        <p>
+                            <span class="header-cart-incart">0</span> item(s) - <span class="header-cart-amount">0 €</span>
+                        </p>
+                    </li>
+                    <li><button class="header-cart-btn-checkout" onclick="window.location = '/shop/cart';">Checkout</button></li>
+                </ul>
+            </xpath>
+        </template>
+    </data>
+</openerp>

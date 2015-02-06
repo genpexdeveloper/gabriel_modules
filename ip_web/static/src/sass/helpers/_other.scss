@@ -1,0 +1,38 @@
+@mixin ip-helpers-other
+{
+	@include ip-helpers-other-clearfix;
+
+	.text-align-left
+	{
+		text-align: left !important;
+	}
+
+	.text-align-right
+	{
+		text-align: right !important;
+	}
+}
+
+@mixin ip-helpers-other-clearfix
+{
+	.clearfix:after {
+	    content: ".";
+	    display: block !important;
+	    clear: both;
+	    visibility: hidden;
+	    line-height: 0;
+	    height: 0;
+	}
+	 
+	.clearfix {
+	    display: block;
+	}
+	 
+	html[xmlns] .clearfix {
+	    display: block;
+	}
+	 
+	* html .clearfix {
+	    height: 1%;
+	}
+}

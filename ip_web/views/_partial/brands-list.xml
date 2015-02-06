@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Popular brand list -->
+        <template id="popular_brand_list" name="IP Popular Brand List">
+            <ul class="list-icon">
+<!--                 <t t-set="attribute_ids" t-value="website_sale_attributes"/> -->
+<!--                   <t t-foreach="attribute_ids" t-as="attribute_id"> -->
+<!--                     <t t-if="attribute_id.visible"> -->
+<!--                       <t t-if="attribute_id.value_ids and attribute_id.type == 'distinct'"> -->
+<!--                           <t t-if="attribute_id.name == 'Brand'"> -->
+<!--                               <t t-set="need_attr_id" t-value="attribute_id.id" /> -->
+<!--                               <ul t-att-data="need_attr_id"> -->
+<!--                                   <t t-foreach="attribute_id.value_ids" t-as="value_id"> -->
+<!--                                       <t t-set="need_ids" t-valuef="#{need_ids},#{value_id.id}" /> -->
+<!--                                       <li> -->
+<!--                                           <a t-attf-href="/shop/?filters=[[#{attribute_id.id},#{value_id.id}]]" t-field="value_id.name" t-att-title="value_id.name"></a> -->
+<!--                                       </li> -->
+<!--                                   </t> -->
+<!--                               </ul> -->
+<!--                           </t> -->
+<!--                       </t> -->
+<!--                     </t> -->
+<!--                   </t> -->
+            </ul>
+        </template>
+    </data>
+</openerp>

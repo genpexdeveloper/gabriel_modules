@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- PRODUCT VARIANT DESCRIPTIONS -->
+        <template id="product_description"  inherit_id="website_sale.product" name="IP Product Description">
+            <xpath expr="//div[@id='product_description']" position="replace">
+                <div id="ip-product-description">
+                    <h2 class="ip-h2">Product Information</h2>
+                    <t t-foreach="product.product_variant_ids" t-as="variant">
+                        <section t-attf-data-variant-id="#{variant.id}" class="ip-product-description">
+
+                            <div class="oe_structure"/>
+
+                            <p class="ip-section-title">description</p>
+                            <p t-field="variant.x_description" />
+
+                            <div class="oe_structure"/>
+
+                        </section>
+                    </t>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</openerp>

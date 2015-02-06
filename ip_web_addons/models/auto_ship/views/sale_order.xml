@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="ip_web_addons_sale_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form.ip_web_addons</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            	<button name="action_cancel" position="after">
+            		<button type="object" name="button_create_auto_ship" string="Create Auto Ship" />
+            	</button>
+            	<notebook position="inside">
+            		<page string="Auto Ship">
+                		<group>
+		                    <field name="auto_ship_id" />
+                		</group>
+            		</page>
+            	</notebook>
+            </field>
+        </record>
+
+    </data>
+</openerp>
